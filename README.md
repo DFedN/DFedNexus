@@ -73,14 +73,6 @@ python experiments/run_experiment.py --config experiments/configs/<given .yaml f
 
 <br>
 
-* * *
-
-#### Anonymity Note
-
-*This repository was created **solely for anonymous sharing** of the simulator code and results for **reproducibility**. It was created **after all paper experiments were completed**, and the code/results were then **copied and organized** here.*
-
-*As a result, this repository **does not include the full development history or commit record** from the original private repository. However, it contains **all simulator code used to produce the reported results**—only the full commit history is missing.*
-
 
 
 
