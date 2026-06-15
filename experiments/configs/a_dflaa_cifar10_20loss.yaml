@@ -1,0 +1,73 @@
+# Quick smoke test — verifies everything works in ~2 minutes
+# 5 nodes, 20 rounds, MNIST + MLP
+
+dataset:    cifar10
+model:      deepcnn
+alpha:      0.1
+num_nodes:  20
+num_rounds: 100
+local_steps: 3
+batch_size: 64
+lr:         0.01
+weight_decay: 0.0005
+seed:       52
+data_root:  /tmp/data
+
+mode:       async
+simulation_time:    4000.0    # virtual seconds budget
+eval_interval_time: 80.0      # evaluate every 60 virtual seconds
+                              # (omit → auto = simulation_time/50)
+topology:   random_directed
+directed:   true
+#intermittent: true
+avg_degree: 4
+loss_min:   0.20
+loss_max:   0.20
+
+communication:
+  packet_size_bytes: 1400      # UDP payload size (standard)
+  bytes_per_coord: 4           # fp32; use 2 for fp16
+
+channel:
+  model: bernoulli
+  q_good: 0.95
+  q_bad: 0.3
+  p_gb: 0.05
+  p_bg: 0.10
+
+bandwidth:
+  mode: homogeneous              # homogeneous | heterogeneous | distance
+  capacity_mbps_mean: 600.0
+  capacity_mbps_std: 50.0       # ~30% relative std
+  capacity_mbps_min: 400.0
+  capacity_mbps_max: 1000.0
+  rtt_ms_mean: 30.0
+  time_varying: false
+  variation_amplitude: 0.3
+  queue_buffer_size: 7             # Kwon & Park's K=7 for p=0.05 loss
+  queue_utilization: 0.8
+
+# DFLAA hyperparameters
+dflaa_tau:   5.0      # AoI decay (in virtual-time units, tune per dataset)
+dflaa_beta:  0.05     # EMA for q_hat (slow update = stable estimate)
+dflaa_c_min: 0.10     # discard updates with <10% completeness
+dflaa_q_floor: 0.05   # prevent 1/q blowup on very bad links
+
+# Async heterogeneity
+speed_dist: heterogeneous   # fast/slow nodes
+speed_min:  0.5
+speed_max:  2.0
+
+K:          100
+eval_every: 2
+track_consensus: true
+track_grad_norm: false
+
+methods:
+  - fedavg
+  - swift
+  - softdsgd-uniform
+  - adpsgd
+  - dflaa
+
+output_dir: ./results/dflaa/cifar10_20_20_random_0p1_none   # directory pattern : dataset_lossValue_nodeCount_topology_dirichlet_extra
