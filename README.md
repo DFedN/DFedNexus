@@ -16,7 +16,7 @@ DFL-AA handles **partial** and **stale** neighbor updates using two simple mecha
 ## System Diagram
 
 <p align="center">
-  <img src="https://github.com/DFedN/DFedNexus/blob/srs/main_dflaa.png" alt="DFL-AA System Diagram" width="85%">
+  <img src="https://github.com/DFedN/DFedNexus/blob/main/results/dflaa/main_dflaa.png" alt="DFL-AA System Diagram" width="85%">
 </p>
 
 ##### Here is the promising performances of our method compared to other baselines (1. on MNIST and 2. on Fashion MNIST) 
