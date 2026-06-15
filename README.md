@@ -19,14 +19,14 @@ DFL-AA handles **partial** and **stale** neighbor updates using two simple mecha
   <img src="https://github.com/DFedN/DFedNexus/blob/main/results/dflaa/main_dflaa.png" alt="DFL-AA System Diagram" width="85%">
 </p>
 
-##### Here is the promising performances of our method compared to other baselines (1. on MNIST and 2. on Fashion MNIST) 
+##### Here is the promising performances of our method compared to other baselines 
 
 <p align="center">
-  <img src="https://github.com/DFedN/DFL-AA/blob/main/icdcs_paper_results/mnist_time_mean_1x3_zoom.png" alt="DFL-AA System Diagram" width="85%">
+  <img src="https://github.com/DFedN/DFedNexus/blob/main/results/dflaa/accuracy.png" alt="Accuracy Comparison" width="85%">
 </p>
 
 <p align="center">
-  <img src="https://github.com/DFedN/DFL-AA/blob/main/icdcs_paper_results/fmnist_time_mean_1x3_zoom.png" alt="DFL-AA System Diagram" width="85%">
+  <img src="https://github.com/DFedN/DFedNexus/blob/main/results/dflaa/cons_dist.png" alt="Consensus Distance Comparison" width="85%">
 </p>
 
 <br>
@@ -60,18 +60,15 @@ Install DFedNexus itself:
 pip install -e src/
 ```
 
-#### (b) Ablation / component-wise results
+#### Run a given configuration or customized one
 
 ``` bash
-python main_results_comp_abl.py \
-    --root ablation_results \
-    --dataset mnist \
-    --alpha 0.1,0.5 \
-    --aggregations dflaa,dflaa_s,dflaa_c,softSGD,softGSD_c \
-    --out-dir icdcs_paper_results
+python experiments/run_experiment.py --config experiments/configs/<given .yaml file name>
 ```
 
-> **Tip:** For results generated under custom modifications (e.g., altered core parameters), reuse the logic in `main_results.py` and pass the correct results directory.
+> **Important:** The configuration setup for the paper is under experiments/configs folder and reuse them to generate the results in the results/dflaa folder. IMPORTANT: For compatability all the results produced by configurations are stored under same directory as compressed .zip file called Archive.zip.
+
+> **Tip:** For results generated under custom modifications (e.g., altered core parameters), and create a .yaml file in the configs folder and update the above command with given .yaml file
 
 
 <br>
